@@ -4,13 +4,6 @@ Mbed OS 6 project for an STM32 Nucleo board (e.g. F401RE) that
 uses an HC-SR04 ultrasonic sensor to follow an object moving in
 a straight line and stop safely when the object stops.
 
-## How to build (Mbed Studio)
-1. *File → New Program → Pristine Mbed OS program* (name it
-   whatever you like) so Mbed Studio fetches `mbed-os`.
-2. Drop these four files into the project root:
-   `main.cpp`, `ultrasonic.h`, `ultrasonic.cpp`,
-   `motor.h`, `motor.cpp`.
-3. Select your target board and `Build & Run`.
 
 ## Wiring (NUCLEO-F401RE MB1136 rev C - labels as printed on the right header)
 
@@ -42,18 +35,4 @@ its logic 5 V can either come from the on-board regulator
 | `ultrasonic.h/cpp`| HC-SR04 driver — ISR-based, non-blocking   |
 | `motor.h/cpp`     | L298N differential-drive driver            |
 
-## Tuning
 
-All behavioural parameters live at the top of `main.cpp`:
-
-```
-TARGET_CM  = 20 cm  // distance to hold
-DEAD_BAND  =  3 cm  // tolerance around the target
-MAX_RANGE  = 60 cm  // ignore objects past this
-K_P        = 0.035  // proportional gain
-MIN_SPEED  = 0.40   // PWM duty needed to start moving
-MAX_SPEED  = 0.80   // upper duty limit
-```
-
-If the car oscillates around the target, lower `K_P`.
-If it cannot start moving, raise `MIN_SPEED`.
